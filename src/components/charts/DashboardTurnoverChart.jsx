@@ -9,47 +9,48 @@ import {
 } from "recharts";
 
 // Dummy Data
-const hoursData = [
-  { name: "Care Givers / Part-time", value: 25, fill: "#F59E0B" }, // amber
-  { name: "Key Players", value: 35, fill: "#6366F1" }, // indigo
+const resignationReasons = [
+  { name: "Other", value: 20, fill: "#9CA3AF" },               // gray
+  { name: "Career Change", value: 35, fill: "#3B82F6" },        // blue
+  { name: "Relocation", value: 15, fill: "#10B981" },           // green
+  { name: "Learning & Development", value: 18, fill: "#F59E0B" }, // amber
+  { name: "Health Issue", value: 12, fill: "#EF4444" },         // red
 ];
 
-const AverageHoursChart = () => {
-  const keyPlayerHours = hoursData.find((d) => d.name === "Key Players")?.value;
-
+const DashboardTurnoverChart = () => {
   return (
     <div className="bg-card dark:bg-dm-card p-6 rounded-xl shadow-md flex flex-col items-center text-gray-900 dark:text-gray-100">
       {/* Heading */}
       <h3 className="text-lg font-bold mb-1 text-center">
-        Average Hours – Care Givers / Part-time Employees
+        Dashboard – Turnover People Leaving Reason
       </h3>
 
       {/* Subtext */}
       <p className="text-xs mb-4 text-gray-600 dark:text-gray-400 text-center">
-        Average working hours split between Key Players and Care Givers / PT
+        Distribution of reasons for resignation
       </p>
 
-      {/* Half Pie Chart */}
-      <div className="relative flex justify-center items-center w-full" style={{ height: 350 }}>
+      {/* Pie Chart */}
+      <div className="flex-grow flex items-center justify-center w-full" style={{ height: 350 }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
-              data={hoursData}
+              data={resignationReasons}
               dataKey="value"
               nameKey="name"
-              startAngle={360}
-              endAngle={0}
-              innerRadius={100}
-              outerRadius={130}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={120}
               paddingAngle={4}
-              label={{ fill: "currentColor", fontSize: 13 }}
+              label={{ fill: "currentColor", fontSize: 12 }}
             >
-              {hoursData.map((d, i) => (
+              {resignationReasons.map((d, i) => (
                 <Cell key={i} fill={d.fill} />
               ))}
             </Pie>
             <Tooltip
-              formatter={(value) => `${value} hrs`}
+              formatter={(value, name) => [`${value} People`, name]}
               contentStyle={{
                 backgroundColor: "white",
                 color: "black",
@@ -60,26 +61,19 @@ const AverageHoursChart = () => {
               itemStyle={{ color: "black" }}
             />
             <Legend
-              iconSize={14}
               layout="horizontal"
               verticalAlign="bottom"
+              iconSize={14}
               wrapperStyle={{ marginTop: 20 }}
               formatter={(value) => (
-                <span className="text-gray-900 dark:text-gray-100 text-sm">{value}</span>
+                <span className="text-gray-900 dark:text-gray-100">{value}</span>
               )}
             />
           </PieChart>
         </ResponsiveContainer>
-
-        {/* Center Label */}
-        <div className="absolute top-1/5 left-1/2 transform -translate-x-1/2 pointer-events-none">
-          <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            Key Players: {keyPlayerHours} hrs
-          </span>
-        </div>
       </div>
     </div>
   );
 };
 
-export default AverageHoursChart;
+export default DashboardTurnoverChart;

@@ -8,48 +8,47 @@ import {
   Legend,
 } from "recharts";
 
-// Dummy Data
-const hoursData = [
-  { name: "Care Givers / Part-time", value: 25, fill: "#F59E0B" }, // amber
-  { name: "Key Players", value: 35, fill: "#6366F1" }, // indigo
+// Dummy Data (replace with real counts)
+const incidentData = [
+  { name: "Incident", value: 35, fill: "#EF4444" }, // red
+  { name: "Hazard & Risk", value: 25, fill: "#F59E0B" }, // amber
+  { name: "Never Miss", value: 40, fill: "#3B82F6" }, // blue
 ];
 
-const AverageHoursChart = () => {
-  const keyPlayerHours = hoursData.find((d) => d.name === "Key Players")?.value;
+const IncidentDoughnutChart = () => {
+  const totalCount = incidentData.reduce((a, b) => a + b.value, 0);
 
   return (
     <div className="bg-card dark:bg-dm-card p-6 rounded-xl shadow-md flex flex-col items-center text-gray-900 dark:text-gray-100">
       {/* Heading */}
-      <h3 className="text-lg font-bold mb-1 text-center">
-        Average Hours – Care Givers / Part-time Employees
-      </h3>
+      <h3 className="text-lg font-bold mb-1 text-center">Incident – Event Type Distribution</h3>
 
       {/* Subtext */}
       <p className="text-xs mb-4 text-gray-600 dark:text-gray-400 text-center">
-        Average working hours split between Key Players and Care Givers / PT
+        Breakdown of Incidents, Hazards & Risks, and Never Miss events
       </p>
 
-      {/* Half Pie Chart */}
-      <div className="relative flex justify-center items-center w-full" style={{ height: 350 }}>
+      {/* Doughnut Chart */}
+      <div className="relative flex justify-center items-center w-full" style={{ height: 400 }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
-              data={hoursData}
+              data={incidentData}
               dataKey="value"
               nameKey="name"
-              startAngle={360}
-              endAngle={0}
-              innerRadius={100}
-              outerRadius={130}
-              paddingAngle={4}
+              cx="50%"
+              cy="50%"
+              innerRadius={90}
+              outerRadius={150}
+              paddingAngle={3}
               label={{ fill: "currentColor", fontSize: 13 }}
             >
-              {hoursData.map((d, i) => (
+              {incidentData.map((d, i) => (
                 <Cell key={i} fill={d.fill} />
               ))}
             </Pie>
             <Tooltip
-              formatter={(value) => `${value} hrs`}
+              formatter={(value, name) => [`${value} Events`, name]}
               contentStyle={{
                 backgroundColor: "white",
                 color: "black",
@@ -60,9 +59,9 @@ const AverageHoursChart = () => {
               itemStyle={{ color: "black" }}
             />
             <Legend
-              iconSize={14}
               layout="horizontal"
               verticalAlign="bottom"
+              iconSize={14}
               wrapperStyle={{ marginTop: 20 }}
               formatter={(value) => (
                 <span className="text-gray-900 dark:text-gray-100 text-sm">{value}</span>
@@ -72,9 +71,9 @@ const AverageHoursChart = () => {
         </ResponsiveContainer>
 
         {/* Center Label */}
-        <div className="absolute top-1/5 left-1/2 transform -translate-x-1/2 pointer-events-none">
+        <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
           <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            Key Players: {keyPlayerHours} hrs
+            Total: {totalCount}
           </span>
         </div>
       </div>
@@ -82,4 +81,4 @@ const AverageHoursChart = () => {
   );
 };
 
-export default AverageHoursChart;
+export default IncidentDoughnutChart;
