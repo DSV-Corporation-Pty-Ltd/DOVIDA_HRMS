@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOVIDA HRMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: '#0284c7',
+                hover: '#0369a1',
+                light: '#e0f2fe',
+              },
+              // Light Theme (DEFAULT)
+              background: '#f1f5f9', // slate-100
+              card: '#ffffff',
+              border: '#e2e8f0', // slate-200
+              'text-primary': '#1e293b', // slate-800
+              'text-secondary': '#64748b', // slate-500
+
+              // Dark Theme Colors
+              'dm-background': '#0f172a', // slate-900
+              'dm-card': '#1e293b', // slate-800
+              'dm-border': '#334155', // slate-700
+              'dm-text-primary': '#f8fafc', // slate-50
+              'dm-text-secondary': '#94a3b8', // slate-400
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-in-out',
+              'float': 'float 15s ease-in-out infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              float: {
+                '0%': { transform: 'translateY(0) rotate(0deg)', opacity: '1' },
+                '100%': { transform: 'translateY(-100vh) rotate(720deg)', opacity: '0' },
+              },
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      .balloon {
+        position: absolute;
+        bottom: -150px;
+        width: 70px;
+        height: 85px;
+        border-radius: 50%;
+        will-change: transform;
+        animation-name: float;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
+      .balloon::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid;
+        border-top-color: inherit;
+      }
+    </style>
+    <script>
+      // Avoid FOUC by applying theme from localStorage
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
+
+    <!-- Import maps for React CDN -->
+    <script type="importmap">
+    {
+      "imports": {
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+        "react/": "https://aistudiocdn.com/react@^19.1.1/",
+        "react": "https://aistudiocdn.com/react@^19.1.1",
+        "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.1"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Use JSX entry instead of TSX -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
