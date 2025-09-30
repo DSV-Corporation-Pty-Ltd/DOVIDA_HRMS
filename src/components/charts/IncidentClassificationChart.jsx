@@ -42,7 +42,7 @@ const IncidentClassificationChart = () => {
               cx="50%"
               cy="50%"
               innerRadius={90}
-              outerRadius={150}
+              outerRadius={135}
               paddingAngle={3}
               label={({ name, percent }) =>
                 `${name}: ${(percent * 100).toFixed(0)}%`

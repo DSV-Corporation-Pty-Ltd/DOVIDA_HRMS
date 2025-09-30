@@ -14,6 +14,11 @@ import NetDifferenceChart from "./charts/NetDifferenceChart";
 import IncidentDoughnutChart from "./charts/IncidentDoughnutChart";
 import IncidentClassificationChart from "./charts/IncidentClassificationChart";
 import NatureOfEventChart from "./charts/NatureOfEventChart";
+import Keyplayervscaregiver from "./charts/keyplayervscaregiver";
+import ExitBarGraph from "./charts/ExitBarGraph";
+import Numberofhires from "./charts/Numberofhires";
+import EmployeeTypeFunnelChart from "./charts/EmployeeTypeFunnelChart";
+import HiresGenderBarChart from "./charts/HiresGenderBarChart";
 
 const Analytics = () => {
   return (
@@ -61,7 +66,11 @@ const Analytics = () => {
 
 
       <NatureOfEventChart />
-
+      <Keyplayervscaregiver />
+      <ExitBarGraph />
+      <Numberofhires />
+      <EmployeeTypeFunnelChart />
+      <HiresGenderBarChart />
 
 
     </div>
